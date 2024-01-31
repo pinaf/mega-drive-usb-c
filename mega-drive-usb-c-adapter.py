@@ -10,7 +10,7 @@ common.object_mode()
 common.cleanup()
 
 # base plate
-base_dimensions = [26, 15.2, 1.5]
+base_dimensions = [26, 15.1, 1.5]
 bpy.ops.mesh.primitive_cube_add()
 common.edit_mode()
 base_obj = bpy.context.active_object
@@ -93,35 +93,36 @@ common.bool_diff(plug_hole, plug_obj, 'Plug_Hole_Mod_2')
 
 # top shave
 top_shave_dimensions = [plug_dimensions[0], 10 * plug_dimensions[2], 2.5]
-top_shave_offset = 1.5
+top_shave_offset_y = 1.5
+top_shave_offset_z = 4
 bpy.ops.mesh.primitive_cube_add()
 common.edit_mode()
 top_shave_obj = bpy.context.active_object
 top_shave_obj.name = 'Top Shave'
 top_shave_obj.scale = [dim / 2 for dim in top_shave_dimensions]
 top_shave_obj.location = plug_face.location.copy()
-top_shave_obj.location.y += top_shave_offset
-top_shave_obj.location.z += 4
+top_shave_obj.location.y += top_shave_offset_y
+top_shave_obj.location.z += top_shave_offset_z
 common.object_mode()
 common.bool_diff(top_shave_obj, plug_obj, 'Top_Shave_Mod')
 
 # top shave B
 top_shave_b_dimensions = [plug_dimensions[0], plug_dimensions[2] + 1, 2.5]
-top_shave_b_offset = -0.1
+top_shave_b_offset_y = -0.1
+top_shave_b_offset_z = 5.3
 bpy.ops.mesh.primitive_cube_add()
 common.edit_mode()
 top_shave_b_obj = bpy.context.active_object
 top_shave_b_obj.name = 'Top Shave B'
 top_shave_b_obj.scale = [dim / 2 for dim in top_shave_b_dimensions]
 top_shave_b_obj.location = plug_face.location.copy()
-top_shave_b_obj.location.y += top_shave_b_offset
-top_shave_b_obj.location.z += 5.5
+top_shave_b_obj.location.y += top_shave_b_offset_y
+top_shave_b_obj.location.z += top_shave_b_offset_z
 common.object_mode()
 common.bool_diff(top_shave_b_obj, plug_face, 'Top_Shave_B_Mod')
 
 # bottom shave
-bottom_shave_dimensions = [plug_face_dimensions[0], plug_face_dimensions[2], 0.6]
-bottom_shave_offset = 2
+bottom_shave_dimensions = [plug_face_dimensions[0], plug_face_dimensions[2], 1]
 bpy.ops.mesh.primitive_cube_add()
 common.edit_mode()
 bottom_shave_obj = bpy.context.active_object
